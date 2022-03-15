@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import data from '../data.json';
 const {height} = Dimensions.get('window');
+
 const ScrollToDown = props => {
   const flatlistRef = useRef();
   const [buttonShown, setButtonShown] = useState(false); //To show ur remaining Text
@@ -117,13 +118,14 @@ const ScrollToDown = props => {
   console.log(scrollY);
   return (
     <SafeAreaView>
-      <Animated.View style={styles.container}>
-        <Animated.FlatList
+      <View style={styles.container}>
+        <FlatList
           inverted
-          onScroll={Animated.event(
-            [{nativeEvent: {contentOffset: {y: scrollY}}}],
-            {useNativeDriver: true, listener: event => handleScroll(event)},
-          )}
+          onScroll={event => handleScroll(event)}
+          // onScroll={Animated.event(
+          //   [{nativeEvent: {contentOffset: {y: scrollY}}}],
+          //   {useNativeDriver: true, listener: event => handleScroll(event)},
+          // )}
           //   scrollEventThrottle={16}
           //   onScrollToTop={console.log('hey')}
           ref={flatlistRef}
@@ -141,7 +143,7 @@ const ScrollToDown = props => {
             <Text style={styles.arrow}>v</Text>
           </Pressable>
         ) : null}
-      </Animated.View>
+      </View>
     </SafeAreaView>
   );
 };
